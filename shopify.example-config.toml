@@ -1,0 +1,33 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "8d886ba4bb02d514e23c2f3d37b8cb59"
+name = "scopes-tuts-2025-08"
+handle = "scopes-tuts-2025-08"
+application_url = "https://example.com/"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+
+[webhooks]
+api_version = "2025-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+[access_scopes]
+# [START optional-scopes.declare-in-app-toml]
+scopes = "read_products"
+optional_scopes = [ "write_products" ]
+# [END optional-scopes.declare-in-app-toml]
+
+[auth]
+redirect_urls = ["https://example.com/api/auth"]
+
+[pos]
+embedded = false
