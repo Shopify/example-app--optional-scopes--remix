@@ -3,6 +3,7 @@ import { json, useFetcher, useLoaderData, useRevalidator } from "@remix-run/reac
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 
+// [START optional-scopes.index-loader]
 export const loader = async ({ request }) => {
   const { scopes } = await authenticate.admin(request);
 
@@ -12,6 +13,7 @@ export const loader = async ({ request }) => {
     hasWriteProducts: scopesDetail.granted.includes("write_products"),
   });
 };
+// [END optional-scopes.index-loader]
 
 export const action = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
