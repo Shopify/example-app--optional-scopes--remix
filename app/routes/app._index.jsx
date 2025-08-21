@@ -99,6 +99,7 @@ export default function Index() {
     }
   }, [productId, shopify]);
   const generateProduct = () => fetcher.submit({}, { method: "POST" });
+  // [START optional-scopes.request-scopes-click-handler]
   const requestScopes = async (scopes) => {
     const response = await shopify.scopes.request(scopes);
 
@@ -111,17 +112,23 @@ export default function Index() {
       });
     }
   };
+  // [END optional-scopes.request-scopes-click-handler]
+
+  // [START optional-scopes.revoke-scopes-click-handler]
   const revokeScopes = async (scopes) => {
     const response = await shopify.scopes.revoke(scopes);
     revalidator.revalidate();
   };
+  // [END optional-scopes.revoke-scopes-click-handler]
 
   return (
     <s-page>
       <ui-title-bar title="Remix app template">
+        {/* [START optional-scopes.request-scopes-top-button] */}
         <button variant="primary" onClick={hasWriteProducts ? generateProduct : () => requestScopes(["write_products"])}>
           {hasWriteProducts ? "Generate a product" : "Request access to write products"}
         </button>
+        {/* [END optional-scopes.request-scopes-top-button] */}
       </ui-title-bar>
 
       <s-section heading="Congrats on creating a new Shopify app 🎉">
@@ -158,12 +165,15 @@ export default function Index() {
           mutation in our API references.
         </s-paragraph>
         <s-stack direction="inline" gap="base">
+          {/* [START optional-scopes.request-scopes-bottom-button] */}
           <s-button
             onClick={hasWriteProducts ? generateProduct : () => requestScopes(["write_products"])}
             {...(isLoading ? { loading: "true" } : {})}
           >
             {hasWriteProducts ? "Generate a product" : "Request access to write products"}
           </s-button>
+          {/* [END optional-scopes.request-scopes-bottom-button] */}
+          {/* [START optional-scopes.revoke-scopes-bottom-button] */}
           {hasWriteProducts ? (
             <s-button
               onClick={() => revokeScopes(["write_products"])}
@@ -173,6 +183,7 @@ export default function Index() {
               Revoke access
             </s-button>
           ) : null}
+          {/* [END optional-scopes.revoke-scopes-bottom-button] */}
           {fetcher.data?.product && (
             <s-button
               href={`shopify:admin/products/${productId}`}
