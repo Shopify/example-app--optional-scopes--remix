@@ -1,9 +1,0 @@
-# ...
-
-[access_scopes]
-# [START optional-scopes.declare-in-app-toml]
-scopes = "read_products"
-optional_scopes = [ "write_products" ]
-# [END optional-scopes.declare-in-app-toml]
-
-# ...

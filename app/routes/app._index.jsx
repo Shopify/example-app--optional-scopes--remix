@@ -83,7 +83,9 @@ export const action = async ({ request }) => {
 export default function Index() {
   const fetcher = useFetcher();
   const shopify = useAppBridge();
+  // [START optional-scopes.use-loader-data]
   const {hasWriteProducts} = useLoaderData();
+  // [END optional-scopes.use-loader-data]
   const revalidator = useRevalidator();
   const isLoading =
     ["loading", "submitting"].includes(fetcher.state) &&
@@ -99,9 +101,12 @@ export default function Index() {
     }
   }, [productId, shopify]);
   const generateProduct = () => fetcher.submit({}, { method: "POST" });
+
   // [START optional-scopes.request-scopes-click-handler]
   const requestScopes = async (scopes) => {
-    const response = await shopify.scopes.request(scopes);
+    const response = await shopify.scopes.request(scopes).catch(error => {
+      // add your error handling here
+    });
 
     if (response.result === 'granted-all') {
       revalidator.revalidate();
@@ -116,7 +121,12 @@ export default function Index() {
 
   // [START optional-scopes.revoke-scopes-click-handler]
   const revokeScopes = async (scopes) => {
-    const response = await shopify.scopes.revoke(scopes);
+    const response = await shopify.scopes.revoke(scopes).catch(error => {
+      // add your error handling here
+    });
+
+    // response.detail will give you up-to-date information about which scopes are still granted and configured
+
     revalidator.revalidate();
   };
   // [END optional-scopes.revoke-scopes-click-handler]
