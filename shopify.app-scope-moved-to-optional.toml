@@ -1,0 +1,9 @@
+# ...
+
+[access_scopes]
+# [START optional-scopes.moved-to-optional]
+scopes = ""
+optional_scopes = [ "write_products" ]
+# [END optional-scopes.moved-to-optional]
+
+# ...

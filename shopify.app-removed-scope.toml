@@ -1,0 +1,8 @@
+# ...
+
+[access_scopes]
+# [START optional-scopes.removed-scope]
+scopes = ""
+# [END optional-scopes.removed-scope]
+
+# ...
