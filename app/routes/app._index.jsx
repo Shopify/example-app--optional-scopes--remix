@@ -112,6 +112,7 @@ export default function Index() {
       revalidator.revalidate();
     }
     else if (response.result === 'declined-all') {
+      // just an example of conditionally giving context to the merchant
       shopify.toast.show("In order to access this feature, you must grant access.", {
         isError: true,
       });
@@ -135,6 +136,7 @@ export default function Index() {
     <s-page>
       <ui-title-bar title="Remix app template">
         {/* [START optional-scopes.request-scopes-top-button] */}
+        {/* Update this title bar button, as well as the button below */}
         <button variant="primary" onClick={hasWriteProducts ? generateProduct : () => requestScopes(["write_products"])}>
           {hasWriteProducts ? "Generate a product" : "Request access to write products"}
         </button>
