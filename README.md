@@ -1,3 +1,5 @@
+> **This repository is no longer maintained.** It has been archived and receives no updates or security fixes. For optional scopes in current apps, see the [Scopes API for React Router apps](https://shopify.dev/docs/api/shopify-app-react-router/latest/apis/scopes).
+
 # Shopify App Template - Remix
 
 This is a template for building a [Shopify app](https://shopify.dev/docs/apps/getting-started) using the [Remix](https://remix.run) framework.
